@@ -4,5 +4,15 @@ use App\Article;
 use Illuminate\Http\Request;
 
 Route::get('/', function (Request $request) {
-  return response(1);
+    $article = Article::find(1);
+
+    $comments = $article->comments()->with([
+      'user',
+      'replies.user',
+      'replies.parent.user',
+      'replies.replies.user',
+      'replies.replies.parent.user'
+    ])->get();
+
+    return view('comments.index', compact('article', 'comments'));
 });
