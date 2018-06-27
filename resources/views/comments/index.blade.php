@@ -18,8 +18,6 @@
   <body>
     <h1>{{ $article->title }}</h1>
 
-    @foreach ($comments as $comment)
-      @include('comments.partials._comment')
-    @endforeach
+      @include('comments.partials._comment', ['comments' => $comments])
   </body>
 </html>
